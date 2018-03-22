@@ -35,7 +35,7 @@
         </init-param>
         <init-param>
             <param-name>allowHeaders</param-name>
-            <param-value> Accept, Origin, X-Requested-With, Content-Type, Last-Modified, Authorization</param-value>
+            <param-value>Accept, Origin, X-Requested-With, Content-Type, Last-Modified, Authorization</param-value>
         </init-param>
     </filter>
     <filter-mapping>

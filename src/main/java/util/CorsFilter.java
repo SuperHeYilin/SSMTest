@@ -14,7 +14,7 @@ import java.io.IOException;
  * @Description:
  * @date 2018/3/21 15:53
  */
-public class CorsFilter implements Filter{
+public class CorsFilter implements Filter {
 
     private static final Logger logger = LoggerFactory.getLogger(CorsFilter.class);
 
