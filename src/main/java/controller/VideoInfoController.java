@@ -1,13 +1,14 @@
 package controller;
 
+import model.VideoInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import service.VideoService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 
 @Controller
@@ -24,5 +25,21 @@ public class VideoInfoController {
         request.setAttribute("name", videoService.listVideoInfo().get(3).getFileName());
         return "hello";
     }
+
+    @RequestMapping(value = "/json", method = RequestMethod.POST)
+    @ResponseBody
+    public Object json(@RequestParam("id") int id) {
+        System.out.println("json");
+        VideoInfo videoInfo = videoService.getVideoInfoById(id);
+        return videoInfo;
+    }
+
+//    @RequestMapping(value = "/json", method = RequestMethod.POST)
+//    @ResponseBody
+//    public Object json(@RequestBody Map<String, Object> map) {
+//        System.out.println("json");
+//        VideoInfo videoInfo = videoService.getVideoInfoById(Integer.parseInt(map.get("id").toString()));
+//        return videoInfo;
+//    }
 
 }

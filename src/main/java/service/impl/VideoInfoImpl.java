@@ -25,4 +25,8 @@ public class VideoInfoImpl implements VideoService {
     public List<VideoInfo> listVideoInfo() {
         return this.dao.listVideoInfo();
     }
+
+    public VideoInfo getVideoInfoById(int id) {
+        return this.dao.getVideoInfoById(id);
+    }
 }
