@@ -3,12 +3,23 @@
 
 <!-- 设置为IUserDao接口方法提供sql语句配置 -->
 <mapper namespace="dao.VideoInfoDao">
-    <sql id="col">file_name as fileName</sql>
-    <select id="listVideoInfo" resultType="VideoInfo">
-        SELECT <include refid="col" /> FROM video_info
+    <sql id="col">id,file_name,path,size_mb,size_b</sql>
+
+    <resultMap id="videoInfo" type="VideoInfo">
+        <result column="file_name" property="fileName" />
+        <result column="size_mb" property="sizeMb" />
+        <result column="size_b" property="sizeB" />
+    </resultMap>
+
+    <select id="listVideoInfo" resultMap="videoInfo">
+        SELECT
+        <include refid="col"/>
+        FROM video_info
     </select>
-    <select id="getVideoInfoById" resultType="VideoInfo" parameterType="int">
-        SELECT <include refid="col" /> FROM video_info WHERE id = #{id}
+    <select id="getVideoInfoById" resultMap="videoInfo" parameterType="int">
+        SELECT
+        <include refid="col"/>
+        FROM video_info WHERE id = #{id}
     </select>
 
 </mapper>
