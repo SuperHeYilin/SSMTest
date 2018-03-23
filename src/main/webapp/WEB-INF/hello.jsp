@@ -12,5 +12,6 @@
 </head>
 <body>
 你好： ${name}
+<img src="../images/马戏Z王.720p.HD韩版中英双字[最新电影www.6vhao.tv].jpg">
 </body>
 </html>

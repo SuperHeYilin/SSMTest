@@ -6,16 +6,39 @@
     <sql id="col">id,file_name,path,size_mb,size_b</sql>
 
     <resultMap id="videoInfo" type="VideoInfo">
-        <result column="file_name" property="fileName" />
-        <result column="size_mb" property="sizeMb" />
-        <result column="size_b" property="sizeB" />
+        <result column="file_name" property="fileName"/>
+        <result column="size_mb" property="sizeMb"/>
+        <result column="size_b" property="sizeB"/>
+        <result column="u_name" property="uName"/>
     </resultMap>
 
+    <!--增加-->
+    <insert id="addVideoInfo" parameterType="VideoInfo" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO video_info (
+        <if test="fileName!=null">file_name</if>
+        <if test="path!=null">,path</if>
+        <if test="sizeMb!=null">,size_mb</if>
+        <if test="sizeB!=null">,size_b</if>
+        <if test="score!=null">,score</if>
+        <if test="uName!=null">,u_name</if>
+        )
+        VALUES (
+        <if test="fileName!=null">#{fileName}</if>
+        <if test="path!=null">,#{path}</if>
+        <if test="sizeMb!=null">,#{sizeMb}</if>
+        <if test="sizeB!=null">,#{sizeB}</if>
+        <if test="score!=null">#{,score}</if>
+        <if test="uName!=null">#{,uName}</if>
+        )
+    </insert>
+
+    <!--查找-->
     <select id="listVideoInfo" resultMap="videoInfo">
         SELECT
         <include refid="col"/>
         FROM video_info
     </select>
+    <!--根据id查找-->
     <select id="getVideoInfoById" resultMap="videoInfo" parameterType="int">
         SELECT
         <include refid="col"/>

@@ -2,7 +2,6 @@ package util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,7 @@ import java.io.IOException;
 
 /**
  * @author super
- * @Description:
+ * @description:
  * @date 2018/3/21 15:53
  */
 public class CorsFilter implements Filter {
@@ -25,6 +24,7 @@ public class CorsFilter implements Filter {
     private String allowHeaders;
     private String exposeHeaders;
 
+    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         allowOrigin = filterConfig.getInitParameter("allowOrigin");
         allowMethods = filterConfig.getInitParameter("allowMethods");
@@ -33,6 +33,7 @@ public class CorsFilter implements Filter {
         exposeHeaders = filterConfig.getInitParameter("exposeHeaders");
     }
 
+    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
@@ -54,6 +55,8 @@ public class CorsFilter implements Filter {
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
+
+    @Override
     public void destroy() {
 
     }

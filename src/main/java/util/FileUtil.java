@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * 文件操作工具类
+ *
+ * @author super
  */
 public class FileUtil {
     public static void main(String[] args) {
@@ -14,6 +16,7 @@ public class FileUtil {
 
     /**
      * 打开某个文件或者文件夹
+     *
      * @param path 文件路径
      */
     public static void openFile(String path) {
@@ -24,7 +27,8 @@ public class FileUtil {
         commands.add(" ");
         commands.add(path);
 
-        ProcessBuilder builder = new ProcessBuilder();
+        ProcessBuilder builder = BuilderUtil.getInstance();
+
         builder.command(commands);
         try {
             builder.start();

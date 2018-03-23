@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IUserDao接口方法提供sql语句配置 -->
+<mapper namespace="dao.FileInfoDao">
+    <sql id="col">id,file_name,path,size_mb,size_b</sql>
+
+    <resultMap id="videoInfo" type="VideoInfo">
+        <result column="file_name" property="fileName"/>
+        <result column="size_mb" property="sizeMb"/>
+        <result column="size_b" property="sizeB"/>
+    </resultMap>
+
+    <select id="listVideoInfo" resultMap="videoInfo">
+        SELECT
+        <include refid="col"/>
+        FROM video_info
+    </select>
+    <select id="getVideoInfoById" resultMap="videoInfo" parameterType="int">
+        SELECT
+        <include refid="col"/>
+        FROM video_info WHERE id = #{id}
+    </select>
+
+</mapper>

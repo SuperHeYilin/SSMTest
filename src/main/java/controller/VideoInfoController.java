@@ -8,8 +8,6 @@ import service.VideoService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
-
 
 @Controller
 @RequestMapping("/video")
@@ -32,6 +30,13 @@ public class VideoInfoController {
         System.out.println("json");
         VideoInfo videoInfo = videoService.getVideoInfoById(id);
         return videoInfo;
+    }
+
+    @RequestMapping(value = "/init/{path}", method = RequestMethod.GET)
+    @ResponseBody
+    public Object addVideoInfo(@PathVariable("path") String path) {
+        System.out.println("init");
+        return videoService.addVideoInfo(path);
     }
 
 //    @RequestMapping(value = "/json", method = RequestMethod.POST)

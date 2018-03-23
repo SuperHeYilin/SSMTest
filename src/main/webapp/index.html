@@ -1,15 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 hello
-<a href="/video/json?id=2">点击</a>
-<form action="/video/json" method="post">
-    <p>First name: <input type="text" name="id"/></p>
-    <input type="submit" value="Submit"/>
+<a href="/file/test">点击</a>
+<!--<form action="/video/json" method="post">-->
+<!--<p>First name: <input type="text" name="id"/></p>-->
+<!--<input type="submit" value="Submit"/>-->
+<!--</form>-->
+<form id="test">
+    选择文件:<input data-role="none" type="file" name="file" width="120px">
+    <button data-role="none" onclick="testUpload();" type="button">测试</button>
 </form>
+
+<script
+        src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+    function testUpload() {
+        var form = new FormData(document.getElementById("test"));
+        var url = "http://localhost:8080" + "/file/upload";    //这里的“项目访问路径”要改为你自己的路径
+        $.ajax({
+            url: url,
+            data: form,
+            type: 'post',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                alert("成功")
+            },
+            error: function (data) {
+
+            }
+        });
+    }
+</script>
+
+<img src="images/1.jpg">
+
 </body>
 </html>

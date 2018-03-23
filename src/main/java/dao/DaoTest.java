@@ -23,6 +23,7 @@ public class DaoTest {
 
     @Test
     public void testSelectUser() throws Exception {
-        System.out.println(dao.listVideoInfo().size());
+//        System.out.println(dao.listVideoInfo().size());
+        System.out.println(System.currentTimeMillis());
     }
 }
