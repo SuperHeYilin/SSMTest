@@ -3,13 +3,15 @@
 
 <!-- 设置为IUserDao接口方法提供sql语句配置 -->
 <mapper namespace="dao.VideoInfoDao">
-    <sql id="col">id,file_name,path,size_mb,size_b</sql>
+    <sql id="col">id,file_name,path,size_mb,size_b,img_path,disk_name</sql>
 
     <resultMap id="videoInfo" type="VideoInfo">
         <result column="file_name" property="fileName"/>
         <result column="size_mb" property="sizeMb"/>
         <result column="size_b" property="sizeB"/>
-        <result column="u_name" property="uName"/>
+        <result column="disk_name" property="diskName"/>
+        <result column="img_name" property="imgName"/>
+        <result column="img_path" property="imgPath"/>
     </resultMap>
 
     <!--增加-->
@@ -20,19 +22,19 @@
         <if test="sizeMb!=null">,size_mb</if>
         <if test="sizeB!=null">,size_b</if>
         <if test="score!=null">,score</if>
-        <if test="uName!=null">,u_name</if>
+        <if test="diskName!=null">,disk_name</if>
         )
         VALUES (
         <if test="fileName!=null">#{fileName}</if>
         <if test="path!=null">,#{path}</if>
         <if test="sizeMb!=null">,#{sizeMb}</if>
         <if test="sizeB!=null">,#{sizeB}</if>
-        <if test="score!=null">#{,score}</if>
-        <if test="uName!=null">#{,uName}</if>
+        <if test="score!=null">,#{score}</if>
+        <if test="diskName!=null">,#{diskName}</if>
         )
     </insert>
 
-    <!--查找-->
+    <!--查找所有-->
     <select id="listVideoInfo" resultMap="videoInfo">
         SELECT
         <include refid="col"/>
@@ -44,5 +46,11 @@
         <include refid="col"/>
         FROM video_info WHERE id = #{id}
     </select>
+
+    <update id="updateVideoImg" parameterType="VideoInfo">
+        UPDATE video_info
+          SET img_path = #{imgPath}
+          WHERE id = #{id}
+    </update>
 
 </mapper>

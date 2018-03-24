@@ -70,14 +70,14 @@ public class VideoPicUtil {
      * @param time 视频时长 秒
      * @return
      */
-    public static boolean processImg(String videoPath, int time) {
+    public static String processImg(String videoPath, int time) {
         File file = new File(videoPath);
         // 记录文件大小
         long size = file.length();
 
         if (!file.exists()) {
             System.err.println("路径[" + videoPath + "]对应的视频文件不存在!");
-            return false;
+            return "视频路径错误";
         }
         List<String> commands = new java.util.ArrayList<String>();
         commands.add(FFMPEG_PATH);
@@ -89,24 +89,29 @@ public class VideoPicUtil {
         commands.add("-ss");
         //这个参数是设置截取视频300秒(5分钟)时的画面
         commands.add(Integer.toString(time));
+//        commands.add("100");
 //    commands.add("-t");
 //    commands.add("2.0");
 //    commands.add("-s");
 //    commands.add("700x525");
 //    commands.add(veido_path.substring(0, veido_path.lastIndexOf(".")).replaceFirst("vedio", "file") + ".jpg");
 //    commands.add("D:/"+file.getName().substring(0, file.getName().lastIndexOf(".")) + ".jpg");
-        commands.add("F:\\Studio\\Workspace\\worksapce_for_idea\\self\\frame\\SSMTest\\src\\main\\webapp\\images\\" + file.getName().substring(0, file.getName().lastIndexOf(".")) + ".jpg");
+//        commands.add("F:\\Studio\\Workspace\\worksapce_for_idea\\self\\frame\\SSMTest\\src\\main\\webapp\\images\\" + file.getName().substring(0, file.getName().lastIndexOf(".")) + ".jpg");
+        // 获取时间戳
+        Long tempFileName = System.currentTimeMillis();
+        String imgPath = "F:\\Studio\\Workspace\\worksapce_for_idea\\self\\frame\\SSMTest\\src\\main\\webapp\\images\\" + tempFileName.toString() + ".jpg";
+        commands.add(imgPath);
 //    System.out.println("D:/pic/"+file.getName().substring(0, file.getName().lastIndexOf(".")) + ".jpg");
         try {
 //      ProcessBuilder builder = new ProcessBuilder();
             ProcessBuilder builder = BuilderUtil.getInstance();
             builder.command(commands);
             builder.start();
-            System.out.println("截取成功");
-            return true;
+            System.out.println("截取成功" + imgPath);
+            return tempFileName.toString() + ".jpg";
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return "异常";
         }
     }
 

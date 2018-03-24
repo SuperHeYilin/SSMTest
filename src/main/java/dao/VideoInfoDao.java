@@ -29,5 +29,12 @@ public interface VideoInfoDao {
      */
     int addVideoInfo(VideoInfo videoInfo);
 
+    /**
+     * 更新视频截图
+     * @param videoInfo
+     * @return
+     */
+    int updateVideoImg(VideoInfo videoInfo);
+
 
 }

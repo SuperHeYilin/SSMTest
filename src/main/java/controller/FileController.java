@@ -1,11 +1,17 @@
 package controller;
 
+import model.VideoInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import service.VideoService;
+import util.FileUtil;
 import util.VideoPicUtil;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +24,9 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/file")
 public class FileController {
+
+    @Resource
+    private VideoService videoService;
 
     @RequestMapping("/upload")
     @ResponseBody
@@ -48,5 +57,19 @@ public class FileController {
     public String test1() {
         VideoPicUtil.processImgNum("D:/下载/迅雷下载/马戏Z王.720p.HD韩版中英双字[最新电影www.6vhao.tv].mp4", 1);
         return "hello";
+    }
+
+    /**
+     * 通过id打开某个文件
+     * @param id
+     */
+    @RequestMapping(value = "/play", method = RequestMethod.POST)
+    @ResponseBody
+    public Object play(@RequestParam("id") int id) {
+        VideoInfo videoInfo = videoService.getVideoInfoById(id);
+        // 获取文件绝对路径
+        String path = videoInfo.getPath();
+        FileUtil.openFile(path);
+        return 1;
     }
 }

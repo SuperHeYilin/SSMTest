@@ -15,5 +15,5 @@ public interface VideoService {
      *
      * @return
      */
-    int addVideoInfo(String path, String uPath);
+    int addVideoInfo(String path, String diskName);
 }

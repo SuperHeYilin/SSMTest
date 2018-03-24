@@ -40,17 +40,17 @@ public class VideoInfoServiceImpl implements VideoService {
      * @return
      */
     @Override
-    public int addVideoInfo(String path, String uPath) {
+    public int addVideoInfo(String path, String diskName) {
         List<String> list = ListFileUtil.listFiles(path);
-        for (String f :
-                list) {
+        for (String f : list) {
             File file = new File(f);
             VideoInfo videoInfo = new VideoInfo();
             videoInfo.setFileName(file.getName());
             videoInfo.setPath(file.getAbsolutePath());
             videoInfo.setSizeMb(file.length() / 1024 / 1024);
             videoInfo.setSizeB(file.length());
-            videoInfo.setuName(uPath);
+            videoInfo.setDiskName(diskName);
+
             dao.addVideoInfo(videoInfo);
         }
         return list.size();

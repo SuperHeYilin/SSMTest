@@ -7,15 +7,33 @@ public class VideoInfo {
     private String path;
     private double sizeMb;
     private long sizeB;
-    private String uName;
+    private String diskName;
     private int state;
+    private String imgName;
+    private String imgPath;
 
-    public String getuName() {
-        return uName;
+
+
+    public VideoInfo() {
     }
 
-    public void setuName(String uName) {
-        this.uName = uName;
+    public VideoInfo(Integer id, Integer score, String fileName, String path, double sizeMb, long sizeB, String diskName, int state) {
+        this.id = id;
+        this.score = score;
+        this.fileName = fileName;
+        this.path = path;
+        this.sizeMb = sizeMb;
+        this.sizeB = sizeB;
+        this.diskName = diskName;
+        this.state = state;
+    }
+
+    public String getDiskName() {
+        return diskName;
+    }
+
+    public void setDiskName(String diskName) {
+        this.diskName = diskName;
     }
 
     public int getState() {
@@ -26,17 +44,7 @@ public class VideoInfo {
         this.state = state;
     }
 
-    public VideoInfo() {
-    }
 
-    public VideoInfo(Integer id, Integer score, String fileName, String path, double sizeMb, long sizeB) {
-        this.id = id;
-        this.score = score;
-        this.fileName = fileName;
-        this.path = path;
-        this.sizeMb = sizeMb;
-        this.sizeB = sizeB;
-    }
 
     public Integer getId() {
         return id;
@@ -84,6 +92,22 @@ public class VideoInfo {
 
     public void setSizeB(long sizeB) {
         this.sizeB = sizeB;
+    }
+
+    public String getImgName() {
+        return imgName;
+    }
+
+    public void setImgName(String imgName) {
+        this.imgName = imgName;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
     @Override
